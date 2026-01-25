@@ -8,7 +8,7 @@ type DeleteAnswerUseCaseRequest = {
 type DeleteAnswerUseCaseResponse = object
 
 export class DeleteAnswerUseCase {
-  constructor(private repository: AnswersRepository) {}
+  constructor(private readonly repository: AnswersRepository) {}
 
   async execute({
     authorId,

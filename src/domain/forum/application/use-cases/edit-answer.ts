@@ -12,7 +12,7 @@ type EditAnswerUseCaseResponse = {
 }
 
 export class EditAnswerUseCase {
-  constructor(private repository: AnswersRepository) {}
+  constructor(private readonly repository: AnswersRepository) {}
 
   async execute({
     authorId,
