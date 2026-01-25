@@ -9,7 +9,7 @@ type AnswerQuestionUseCaseRequest = {
 }
 
 export class AnswerQuestionUseCase {
-  constructor(private answersRepository: AnswersRepository) {}
+  constructor(private repository: AnswersRepository) {}
 
   async execute({
     instructorId,
@@ -21,7 +21,7 @@ export class AnswerQuestionUseCase {
       authorId: new UniqueEntityId(instructorId),
       questionId: new UniqueEntityId(questionId),
     })
-    await this.answersRepository.Create(answer)
+    await this.repository.Create(answer)
     return answer
   }
 }
