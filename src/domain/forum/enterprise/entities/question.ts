@@ -4,7 +4,7 @@ import { UniqueEntityId } from '@/core/entities/value-objects/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import dayjs from 'dayjs'
 
-type QuestionProps = {
+export type QuestionProps = {
   authorId: UniqueEntityId
   bestAnswerId?: UniqueEntityId
   title: string
