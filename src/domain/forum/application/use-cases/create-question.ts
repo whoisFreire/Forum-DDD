@@ -26,7 +26,7 @@ export class CreateQuestionUseCase {
       content,
     })
 
-    await this.repository.Create(question)
+    await this.repository.create(question)
 
     return {
       question,

@@ -25,7 +25,7 @@ export class AnswerQuestionUseCase {
       authorId: new UniqueEntityId(instructorId),
       questionId: new UniqueEntityId(questionId),
     })
-    await this.repository.Create(answer)
+    await this.repository.create(answer)
     return {
       answer,
     }

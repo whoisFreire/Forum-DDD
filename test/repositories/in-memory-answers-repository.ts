@@ -12,7 +12,7 @@ export class InMemoryAnswersRepository implements AnswersRepository {
     return answer
   }
 
-  async Create(answer: Answer) {
+  async create(answer: Answer) {
     this.items.push(answer)
   }
 

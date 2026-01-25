@@ -1,18 +1,18 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { makeQuestion } from 'test/factories/make-question'
-import { DeleteQuestionUseCase } from './delete-question'
+import { EditQuestionUseCase } from './edit-question'
 import { UniqueEntityId } from '@/core/entities/value-objects/unique-entity-id'
 
 let inMemoryRepository: InMemoryQuestionsRepository
-let sut: DeleteQuestionUseCase
+let sut: EditQuestionUseCase
 
-describe('Delete Question', () => {
+describe('Edit Question', () => {
   beforeEach(() => {
     inMemoryRepository = new InMemoryQuestionsRepository()
-    sut = new DeleteQuestionUseCase(inMemoryRepository)
+    sut = new EditQuestionUseCase(inMemoryRepository)
   })
 
-  it('should be able to delete a question', async () => {
+  it('should be able to edit a question', async () => {
     const newQuestion = makeQuestion(
       {
         authorId: new UniqueEntityId('author-1'),
@@ -22,14 +22,19 @@ describe('Delete Question', () => {
     await inMemoryRepository.create(newQuestion)
 
     await sut.execute({
+      questionId: newQuestion.id.toString(),
       authorId: 'author-1',
-      questionId: 'question-1',
+      content: 'Updated Content',
+      title: 'Updated Title',
     })
 
-    expect(inMemoryRepository.items).toHaveLength(0)
+    expect(inMemoryRepository.items[0]).toMatchObject({
+      title: 'Updated Title',
+      content: 'Updated Content',
+    })
   })
 
-  it('should not be able to delete a question from another author', async () => {
+  it('should not be able to edit a question from another author', async () => {
     const newQuestion = makeQuestion(
       {
         authorId: new UniqueEntityId('author-1'),
@@ -40,8 +45,10 @@ describe('Delete Question', () => {
 
     await expect(
       sut.execute({
+        questionId: newQuestion.id.toString(),
         authorId: 'author-2',
-        questionId: 'question-1',
+        content: 'Updated Content',
+        title: 'Updated Title',
       }),
     ).rejects.toBeInstanceOf(Error)
   })
