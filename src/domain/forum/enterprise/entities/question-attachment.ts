@@ -2,13 +2,13 @@ import { Entity } from '@/core/entities/entity'
 import { UniqueEntityId } from '@/core/entities/value-objects/unique-entity-id'
 
 type QuestionAttachmentProps = {
-  quesitonId: UniqueEntityId
+  questionId: UniqueEntityId
   attachmentId: UniqueEntityId
 }
 
 export class QuestionAttachment extends Entity<QuestionAttachmentProps> {
   get questionId() {
-    return this.props.quesitonId
+    return this.props.questionId
   }
 
   get attachmentId() {
